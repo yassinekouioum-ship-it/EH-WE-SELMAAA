@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rien que jte mange slimoucha</title>
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #fff0f3;
+      color: #4a1825;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    main {
+      width: min(90%, 600px);
+      padding: 30px 15px;
+    }
+
+    #bouton {
+      width: 130px;
+      height: 130px;
+      border: 0;
+      border-radius: 50%;
+      background: #e63946;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.25s;
+    }
+
+    #message {
+      min-height: 50px;
+      margin-top: 100px;
+      font-size: 20px;
+    }
+
+    #fin {
+      display: none;
+    }
+
+    label {
+      display: block;
+      margin: 18px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    #photoChoix {
+      display: none;
+      max-width: 90%;
+      max-height: 400px;
+      margin: 20px auto;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section id="accueil">
+      <h1>J’ai une petite question pour toi…</h1>
+
+      <button id="bouton" onclick="cliquer()">
+        Clique-moi ❤️
+      </button>
+
+      <p id="message"></p>
+    </section>
+
+    <section id="fin">
+      <h1>Alors, tu m’aimes ? 💌</h1>
+
+      <label>
+        <input type="checkbox" id="choixOui" onchange="choisir('oui')">
+        Oui, bien sûr ❤️
+      </label>
+
+      <label>
+        <input type="checkbox" id="choixNon" onchange="choisir('non')">
+        Non 🙃
+      </label>
+
+      <img id="photoChoix" src="" alt="">
+    </section>
+  </main>
+
+  <script>
+    let nombreDeClics = 0;
+
+    const messages = [
+      "Vzz clique sinon jte jme3 apre",
+      "Vzz encore",
+      "Allez, un petit effort Fatou",
+      "Vzz là",
+      "rien que clique"
+    ];
+
+    function cliquer() {
+      nombreDeClics++;
+
+      if (nombreDeClics <= messages.length) {
+        document.getElementById("message").textContent =
+          messages[nombreDeClics - 1];
+
+        const taille = 1 + nombreDeClics * 0.22;
+        document.getElementById("bouton").style.transform =
+          `scale(${taille})`;
+      } else {
+        document.getElementById("accueil").style.display = "none";
+        document.getElementById("fin").style.display = "block";
+      }
+    }
+
+    function choisir(reponse) {
+      const oui = document.getElementById("choixOui");
+      const non = document.getElementById("choixNon");
+      const photo = document.getElementById("photoChoix");
+
+      oui.checked = reponse === "oui";
+      non.checked = reponse === "non";
+
+      if (reponse === "oui") {
+        photo.src = "IMG_2543.jpeg";
+        photo.alt = "Photo pour la réponse oui";
+      } else {
+        photo.src = "IMG_2605.jpeg";
+        photo.alt = "Photo pour la réponse non";
+      }
+
+      photo.style.display = "block";
+    }
+  </script>
+</body>
+</html>
